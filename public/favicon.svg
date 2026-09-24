@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Outer Archival Shield / Seal -->
+  <rect x="3" y="3" width="58" height="58" rx="2" stroke="#d4af37" stroke-width="1.5" fill="#0d0e12" />
+  <rect x="7" y="7" width="50" height="50" rx="1" stroke="#ffffff" stroke-opacity="0.2" stroke-width="0.75" />
+  
+  <!-- Four Pillars Geometric Matrix -->
+  <!-- Top: Diamond Finial -->
+  <path d="M32 11L36 17H28L32 11Z" fill="#d4af37" />
+  
+  <!-- Classical Archival Monogram - Distinct from SS -->
+  <!-- Central Architectural Column / Quill / Archive Folio Symbol -->
+  <path d="M22 21H42" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" />
+  <path d="M25 21V43" stroke="#ffffff" stroke-width="1.25" />
+  <path d="M39 21V43" stroke="#ffffff" stroke-width="1.25" />
+  <path d="M32 18V45" stroke="#d4af37" stroke-width="1.5" />
+  <circle cx="32" cy="28" r="2.5" fill="#d4af37" />
+  <path d="M20 45H44" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" />
+  <path d="M17 48H47" stroke="#d4af37" stroke-width="1" stroke-linecap="round" />
+  
+  <!-- Subtle 4 Pillar Corner Coordinates -->
+  <circle cx="11" cy="11" r="1" fill="#d4af37" />
+  <circle cx="53" cy="11" r="1" fill="#d4af37" />
+  <circle cx="11" cy="53" r="1" fill="#d4af37" />
+  <circle cx="53" cy="53" r="1" fill="#d4af37" />
+</svg>
