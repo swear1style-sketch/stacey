@@ -129,7 +129,7 @@ export const LightboxModal = ({ data, onClose }: LightboxModalProps) => {
             </div>
             <div className="flex flex-wrap items-center justify-between text-xs text-muted-foreground archive-sans">
               <span>Status: Full Original Scope Visible (Uncropped)</span>
-              <span>Stacey Soans Digital Encyclopedia &amp; Media Archive</span>
+              <span>Stacey Soans — Professional Model</span>
             </div>
           </motion.div>
         )}

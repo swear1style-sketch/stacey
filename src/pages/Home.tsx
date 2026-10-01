@@ -1,120 +1,98 @@
+import { SITE_CONFIG, PAGES_METADATA } from "@/config/site";
 import SEO from "@/components/SEO";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import PortfolioStrip from "@/components/PortfolioStrip";
+import ModelingCategoriesSection from "@/components/ModelingCategoriesSection";
 import AboutSection from "@/components/AboutSection";
-import HighlightsSection from "@/components/HighlightsSection";
-import VideoReelSection from "@/components/VideoReelSection";
 import GallerySection from "@/components/GallerySection";
+import HomePressAndRepresentation from "@/components/HomePressAndRepresentation";
 import ContactSection from "@/components/ContactSection";
 import FooterSection from "@/components/FooterSection";
 
 export const Home = () => {
+  const meta = PAGES_METADATA.home;
+
   const homeSchema = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "WebSite",
-        "@id": "https://staceysoans.com/#website",
-        "url": "https://staceysoans.com/",
-        "name": "Stacey Soans Digital Encyclopedia & Media Archive",
-        "description":
-          "A comprehensive digital resource covering Stacey Soans, her professional work, publications, media and four professional pillars: Human Resources, golf, authorship and modelling in Toronto, Canada.",
+        "@id": `${SITE_CONFIG.siteUrl}/#website`,
+        "url": `${SITE_CONFIG.siteUrl}/`,
+        "name": "Stacey Soans — Professional Model",
+        "description": meta.description,
         "publisher": {
-          "@type": "Person",
-          "name": "Stacey Soans",
+          "@id": SITE_CONFIG.personId,
         },
       },
       {
         "@type": "Person",
-        "@id": "https://staceysoans.com/#person",
-        "name": "Stacey Soans",
-        "gender": "Female",
-        "jobTitle": [
-          "Human Resources Leader & HRBP",
-          "Professional Golfer & Golf Writer",
-          "Author of Fairways & Femininity",
-          "Professional Fashion Model",
-        ],
-        "workLocation": {
-          "@type": "Place",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Toronto",
-            "addressRegion": "Ontario",
-            "addressCountry": "Canada",
-          },
+        "@id": SITE_CONFIG.personId,
+        "name": SITE_CONFIG.personName,
+        "jobTitle": "Professional Model",
+        "description": meta.description,
+        "url": `${SITE_CONFIG.siteUrl}/`,
+        "image": `${SITE_CONFIG.siteUrl}/og-image.jpg`,
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": SITE_CONFIG.location.city,
+          "addressRegion": SITE_CONFIG.location.region,
+          "addressCountry": SITE_CONFIG.location.country,
         },
         "knowsAbout": [
-          "Human Resources Strategic Leadership",
-          "Talent Management & Organizational Design",
-          "Women's Professional Golf",
-          "Golf Journalism & Course Writing",
-          "Fairways & Femininity Book",
-          "High Fashion & Runway Modelling",
+          "Fashion Modeling",
+          "Beauty Campaigns",
+          "Editorial Photography",
+          "Runway Modeling",
+          "Commercial Photography",
         ],
       },
     ],
   };
 
   return (
-    <main className="bg-background min-h-screen overflow-x-hidden selection:bg-gold/30 selection:text-white">
-      {/* Dynamic High Domain Authority SEO & Structured Data */}
+    <div className="bg-background min-h-screen overflow-x-hidden selection:bg-gold/30 selection:text-white">
+      {/* Central SEO Metadata */}
       <SEO
-        title="Stacey Soans Digital Encyclopedia & Media Archive"
-        description="A comprehensive digital resource covering Stacey Soans, her professional work, publications, media and four professional pillars: Human Resources, golf, authorship and modelling in Toronto, Canada."
-        canonical="/"
+        title={meta.title}
+        description={meta.description}
+        canonical={meta.canonical}
         type="website"
-        keywords={[
-          "Stacey Soans",
-          "Stacey Soans Toronto",
-          "Stacey Soans Human Resources",
-          "Stacey Soans Professional Golf",
-          "Fairways and Femininity",
-          "Stacey Soans Author",
-          "Stacey Soans Model",
-          "Digital Encyclopedia Stacey Soans",
-          "Media Archive Stacey Soans",
-        ]}
+        keywords={meta.keywords}
         schema={homeSchema}
       />
 
-      {/* Atmospheric Grain Overlay from original template */}
+      {/* Atmospheric Grain Overlay */}
       <div className="grain-overlay" />
 
       {/* Floating Transparent Luxury Navbar */}
       <Navbar />
 
-      {/* Exact Same Iconic Full-Screen Hero Section Design */}
+      {/* 1. Hero Section */}
       <HeroSection />
 
-      {/* Template Portfolio Strip */}
+      {/* 2. Selected Portfolio */}
       <PortfolioStrip />
 
-      {/* Template About Section */}
-      <div id="about">
-        <AboutSection />
-      </div>
+      {/* 3. Modeling Categories */}
+      <ModelingCategoriesSection />
 
-      {/* Template Highlights Section */}
-      <HighlightsSection />
+      {/* 4. About Stacey */}
+      <AboutSection />
 
-      {/* Template Video Reel Section */}
-      <VideoReelSection />
+      {/* 5. Selected Work / Portfolio Gallery */}
+      <GallerySection />
 
-      {/* Template Gallery Section */}
-      <div id="gallery">
-        <GallerySection />
-      </div>
+      {/* 6. Publications & Press + 7. Representation */}
+      <HomePressAndRepresentation />
 
-      {/* Template Contact Section */}
-      <div id="contact">
-        <ContactSection />
-      </div>
+      {/* 8. Booking CTA */}
+      <ContactSection />
 
-      {/* Required Footer Section */}
+      {/* Footer */}
       <FooterSection />
-    </main>
+    </div>
   );
 };
 

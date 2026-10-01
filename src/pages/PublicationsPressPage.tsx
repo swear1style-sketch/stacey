@@ -1,84 +1,85 @@
 import { Link } from "react-router-dom";
-import { Newspaper, FileText, Download, ExternalLink, Mic, Radio, Award, ArrowRight, Mail } from "lucide-react";
+import { ArrowRight, Newspaper, Camera, Mail } from "lucide-react";
 import SEO from "@/components/SEO";
-import Layout from "@/components/Layout";
+import Layout, { useLightbox } from "@/components/Layout";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import UncroppedPhoto from "@/components/UncroppedPhoto";
+import { SITE_CONFIG, PAGES_METADATA } from "@/config/site";
+
+import stacy1 from "@/assets/stacey/stacy-1.jpg";
+import heroStacey from "@/assets/stacey/hero-stacey.jpg";
+import staceyCampaign1 from "@/assets/stacey/stacey-campaign-1.jpg";
 
 export const PublicationsPressPage = () => {
+  const { openLightbox } = useLightbox();
+  const meta = PAGES_METADATA.publications;
+
   const pressSchema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "Publications & Press — Stacey Soans",
-    "description":
-      "Official press coverage, media features, interviews, and published articles highlighting Stacey Soans across Human Resources, golf, authorship, and modelling.",
+    "name": meta.title,
+    "description": meta.description,
+    "url": `${SITE_CONFIG.siteUrl}/publications-and-press/`,
+    "about": {
+      "@type": "Person",
+      "@id": SITE_CONFIG.personId,
+      "name": SITE_CONFIG.personName,
+      "jobTitle": "Professional Model",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": SITE_CONFIG.location.city,
+        "addressRegion": SITE_CONFIG.location.region,
+        "addressCountry": SITE_CONFIG.location.country,
+      },
+    },
   };
 
-  const pressFeatures = [
+  const archiveEntries = [
     {
-      outlet: "Toronto Life & Style Magazine",
-      title: "The Multidisciplinary Architect: How Stacey Soans Bridges Corporate Strategy, Sports & Fashion",
-      date: "February 2026",
-      category: "Feature Cover Story",
-      quote:
-        "“Stacey Soans represents a new paradigm of Canadian leadership—one where intellectual depth and aesthetic elegance are mutually reinforcing.”",
+      src: heroStacey,
+      title: "Studio Monochrome Portraiture & Editorial Study",
+      category: "Editorial Photography",
+      year: "2026",
+      catalogId: "PRS-ED-01",
+      alt: "Stacey Soans studio monochrome modeling portrait in Toronto",
+      caption: "Studio Monochrome Portraiture — High-Neck Silhouette",
+      details: "High-resolution studio portraiture documenting form, posture, and monochrome lighting.",
     },
     {
-      outlet: "Canadian Golf Journal",
-      title: "Fairways & Femininity: Reimagining Women’s Place on Championship Greens",
-      date: "November 2025",
-      category: "Literary & Sports Review",
-      quote:
-        "“An essential read for anyone invested in the future of the game. Soans writes with rare lyricism and authoritative technical command.”",
+      src: stacy1,
+      title: "High Fashion Editorial Portraiture",
+      category: "Fashion Publication",
+      year: "2025",
+      catalogId: "PRS-FSH-02",
+      alt: "Stacey Soans in high-fashion editorial portrait photography",
+      caption: "High Fashion Editorial Portraiture",
+      details: "Editorial spread featuring classic poise, tailoring, and contemporary fashion aesthetics.",
     },
     {
-      outlet: "The Executive HR Dispatch",
-      title: "Strategic HR in High-Velocity Tech: A Conversation with Stacey Soans",
-      date: "September 2025",
-      category: "Executive Interview",
-      quote:
-        "“Soans breaks down how human-centered culture transformation directly drives enterprise valuation during turbulent market cycles.”",
-    },
-    {
-      outlet: "Haute Runway International",
-      title: "Presence Over Trend: Editorial Profile on Model Stacey Soans",
-      date: "June 2025",
-      category: "Fashion Editorial Feature",
-      quote:
-        "“A commanding, serene presence on the runway that draws every lens with authentic composure.”",
-    },
-  ];
-
-  const podcasts = [
-    {
-      show: "The Modern Multi-Hyphenate Podcast",
-      episode: "Episode 84: Balancing Corporate Advisory and Creative Passions",
-      host: "Executive Media Network",
-      duration: "52 min",
-    },
-    {
-      show: "Fairway Perspectives",
-      episode: "Episode 112: The Psychology of the Competitive Swing with Stacey Soans",
-      host: "North American Golf Audio",
-      duration: "46 min",
+      src: staceyCampaign1,
+      title: "Beauty & Complexion Campaign Photography",
+      category: "Commercial & Beauty",
+      year: "2026",
+      catalogId: "PRS-BTY-03",
+      alt: "Stacey Soans beauty modeling portfolio closeup portrait",
+      caption: "Beauty Campaign Closeup Study",
+      details: "Cosmetic closeup photography highlighting natural skin tones, texture, and refined beauty standards.",
     },
   ];
 
   return (
     <Layout>
       <SEO
-        title="Publications & Press — Stacey Soans Media Coverage"
-        description="Comprehensive press archive, feature interviews, media coverage, and downloadable press assets for Stacey Soans in Toronto, Canada."
-        canonical="/publications-press"
+        title={meta.title}
+        description={meta.description}
+        canonical={meta.canonical}
         type="website"
-        keywords={[
-          "Stacey Soans Press",
-          "Stacey Soans Publications",
-          "Stacey Soans Interviews",
-          "Fairways and Femininity Press",
-          "Stacey Soans Media Kit",
-          "Toronto HR and Golf Press",
-        ]}
+        keywords={meta.keywords}
         schema={pressSchema}
+        breadcrumbs={[
+          { name: "Home", item: "/" },
+          { name: "Publications & Press", item: "/publications-and-press/" },
+        ]}
       />
 
       <div className="section-padding py-8 bg-[#090b0e] border-b border-border/60">
@@ -88,113 +89,87 @@ export const PublicationsPressPage = () => {
           {/* Page Header */}
           <div className="max-w-3xl mb-12">
             <span className="archive-sans text-xs uppercase tracking-[0.25em] text-gold font-medium block mb-2">
-              Official Media Relations
+              Editorial Archive &amp; Press Documentation
             </span>
             <h1 className="archive-heading text-4xl sm:text-5xl md:text-6xl font-normal text-primary mb-4">
-              Publications &amp; Press
+              Stacey Soans — Publications &amp; Press
             </h1>
             <p className="font-serif text-lg md:text-xl text-muted-foreground leading-relaxed">
-              Curated press coverage, feature interviews, published journalistic essays, podcast appearances, and official media resources.
+              Editorial documentation, publication photography, and verified media coverage connected to Stacey Soans’ professional modelling career.
             </p>
           </div>
 
-          {/* Media Kit Download Banner */}
-          <div className="p-6 md:p-8 bg-card/80 border border-gold/40 mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-xl">
-            <div>
-              <span className="text-xs archive-sans uppercase tracking-widest text-gold block mb-1">
-                Official Press Kit &amp; Media Assets
-              </span>
-              <h2 className="archive-heading text-2xl font-normal text-primary mb-2">
-                Media Kit &amp; High-Resolution Bio Packet
-              </h2>
-              <p className="font-serif text-sm text-muted-foreground max-w-xl">
-                Contains verified biographical summaries, executive portraiture in full original uncropped resolutions, book excerpts, and standardized citation guidelines.
+          {/* Factual Narrative */}
+          <div className="max-w-3xl mb-16 space-y-4 font-serif text-base sm:text-lg text-muted-foreground leading-relaxed">
+            <div className="p-6 bg-card/60 border border-border/80 text-foreground/95">
+              <p className="font-medium text-lg leading-relaxed">
+                Stacey Soans of Toronto, Canada has been featured across professional publishing, editorial publications and other forms of professional media.
               </p>
             </div>
-            <div className="flex flex-wrap items-center gap-3">
-              <Link
-                to="/contact"
-                className="px-5 py-2.5 bg-gold text-black hover:bg-gold-light transition-colors text-xs uppercase tracking-widest archive-sans font-medium"
-              >
-                Request Press Kit
-              </Link>
-              <Link
-                to="/contact"
-                className="px-5 py-2.5 border border-border text-foreground hover:text-gold transition-colors text-xs uppercase tracking-widest archive-sans"
-              >
-                Media Inquiries
-              </Link>
-            </div>
+            <p>
+              The modelling archive includes selected professional fashion, beauty, editorial, runway and commercial work.
+            </p>
+            <p>
+              Stacey Soans' modelling credits include editorial and runway work as well as appearances associated with Toronto fashion events and publications.
+            </p>
           </div>
 
-          {/* Selected Press Coverage */}
-          <div className="mb-20">
-            <div className="text-center max-w-2xl mx-auto mb-12">
-              <span className="archive-sans text-xs uppercase tracking-[0.25em] text-gold font-medium block mb-2">
-                Press Archive
-              </span>
-              <h2 className="archive-heading text-3xl md:text-4xl font-normal text-primary">
-                Featured Editorial &amp; Media Coverage
-              </h2>
+          {/* Clean Editorial Archive Cards */}
+          <div className="space-y-12 mb-20">
+            <div className="flex items-center gap-2 text-xs archive-sans uppercase tracking-widest text-gold pb-4 border-b border-border/60">
+              <Newspaper className="w-4 h-4" />
+              <span>Documented Editorial Media Entries</span>
             </div>
 
-            <div className="space-y-6">
-              {pressFeatures.map((feat) => (
-                <div
-                  key={feat.title}
-                  className="p-6 md:p-8 bg-card/60 border border-border/80 hover:border-gold/50 transition-colors"
-                >
-                  <div className="flex flex-wrap items-center justify-between gap-2 text-xs archive-sans mb-3 pb-2 border-b border-border/50">
-                    <span className="text-gold uppercase tracking-wider font-medium">
-                      {feat.outlet}
-                    </span>
-                    <div className="flex items-center gap-3 text-muted-foreground">
-                      <span>{feat.category}</span>
-                      <span>•</span>
-                      <span>{feat.date}</span>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {archiveEntries.map((entry) => (
+                <div key={entry.catalogId} className="space-y-4">
+                  <UncroppedPhoto
+                    src={entry.src}
+                    alt={entry.alt}
+                    caption={entry.caption}
+                    catalogId={entry.catalogId}
+                    category={entry.category}
+                    year={entry.year}
+                    onOpenLightbox={openLightbox}
+                  />
+                  <div className="p-4 bg-secondary/30 border border-border/60 space-y-2">
+                    <div className="flex items-center justify-between text-[11px] archive-sans text-muted-foreground">
+                      <span className="uppercase text-gold font-medium">{entry.category}</span>
+                      <span>{entry.year}</span>
                     </div>
+                    <h2 className="font-serif text-base text-foreground font-medium leading-snug">
+                      {entry.title}
+                    </h2>
+                    <p className="font-serif text-xs text-muted-foreground leading-relaxed">
+                      {entry.details}
+                    </p>
                   </div>
-
-                  <h3 className="archive-heading text-xl md:text-2xl font-normal text-primary mb-4">
-                    {feat.title}
-                  </h3>
-
-                  <blockquote className="font-serif italic text-base text-foreground/80 border-l-2 border-gold pl-4 py-1">
-                    {feat.quote}
-                  </blockquote>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Audio & Podcast Interviews */}
-          <div className="mb-16">
-            <div className="text-center max-w-2xl mx-auto mb-12">
-              <span className="archive-sans text-xs uppercase tracking-[0.25em] text-gold font-medium block mb-2">
-                Broadcast &amp; Audio
+          {/* Press Inquiries Callout */}
+          <div className="p-8 bg-card/60 border border-border/80 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div>
+              <span className="text-xs archive-sans uppercase tracking-widest text-gold font-medium block mb-2">
+                Press &amp; Media Inquiries
               </span>
-              <h2 className="archive-heading text-3xl md:text-4xl font-normal text-primary">
-                Podcast &amp; Broadcast Appearances
+              <h2 className="font-serif text-2xl text-primary font-normal mb-2">
+                Media &amp; Publication Contact
               </h2>
+              <p className="font-serif text-sm text-muted-foreground max-w-xl">
+                Media, publishing, professional collaboration and business inquiries can be directed through the appropriate contact information provided on this website.
+              </p>
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {podcasts.map((pod) => (
-                <div key={pod.episode} className="p-6 bg-card/60 border border-border/80 hover:border-gold/40 transition-colors">
-                  <div className="flex items-center gap-2 text-xs archive-sans text-gold mb-3">
-                    <Mic className="w-4 h-4" />
-                    <span>{pod.show}</span>
-                  </div>
-                  <h3 className="archive-heading text-xl font-normal text-primary mb-2">
-                    {pod.episode}
-                  </h3>
-                  <div className="flex items-center justify-between text-xs archive-sans text-muted-foreground mt-4 pt-3 border-t border-border/50">
-                    <span>{pod.host}</span>
-                    <span>{pod.duration}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <Link
+              to="/contact/"
+              className="inline-flex items-center gap-2 px-8 py-3.5 bg-gold text-black text-xs uppercase tracking-[0.25em] archive-sans font-medium hover:bg-gold-light transition-colors flex-shrink-0"
+            >
+              <span>Submit Media Inquiry</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
         </div>
       </div>

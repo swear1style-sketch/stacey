@@ -14,9 +14,10 @@ export default {
     },
     extend: {
       fontFamily: {
-        serif: ['"Times New Roman"', "Times", "Baskerville", "Georgia", "serif"],
-        sans: ["-apple-system", "BlinkMacSystemFont", '"Segoe UI"', "Roboto", "Helvetica", "Arial", "sans-serif"],
-        body: ['"Times New Roman"', "Times", "Georgia", "serif"],
+        serif: ['"Playfair Display"', "Georgia", '"Times New Roman"', "serif"],
+        display: ['"Cinzel"', '"Playfair Display"', "Georgia", "serif"],
+        sans: ['"Plus Jakarta Sans"', '"Montserrat"', "-apple-system", "BlinkMacSystemFont", '"Segoe UI"', "sans-serif"],
+        body: ['"Plus Jakarta Sans"', "-apple-system", "sans-serif"],
         mono: ['"SF Mono"', "Monaco", "Consolas", "monospace"],
       },
       colors: {

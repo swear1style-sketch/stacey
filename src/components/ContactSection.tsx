@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, CheckCircle2 } from "lucide-react";
+import { Mail, CheckCircle2, ArrowRight } from "lucide-react";
+import { SITE_CONFIG } from "@/config/site";
 
-const ContactSection = () => {
+export const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -25,7 +26,7 @@ const ContactSection = () => {
     "w-full bg-transparent border-b border-border py-3 text-sm text-primary placeholder:text-muted-foreground/50 focus-glow transition-all duration-500 font-serif tracking-wide";
 
   return (
-    <section id="contact" className="py-24 md:py-32 section-padding bg-secondary/20">
+    <section id="contact-booking" className="py-20 md:py-32 section-padding bg-secondary/20 border-b border-border/40">
       <div className="max-w-2xl mx-auto">
         <motion.div
           className="text-center mb-16"
@@ -35,13 +36,13 @@ const ContactSection = () => {
           transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
         >
           <span className="archive-sans text-xs uppercase tracking-[0.25em] text-gold font-medium block mb-2">
-            Direct Booking &amp; Correspondence
+            Direct Booking &amp; Inquiries
           </span>
           <h2 className="font-serif text-3xl md:text-5xl text-primary mb-4 font-normal">
-            Book Stacey Soans
+            Contact Stacey Soans
           </h2>
-          <p className="font-serif text-sm md:text-base text-muted-foreground tracking-wide">
-            For fashion campaigns, runway, executive HR advisory, golf appearances, and author lectures in Toronto and internationally.
+          <p className="font-serif text-sm md:text-base text-muted-foreground leading-relaxed max-w-xl mx-auto">
+            For professional inquiries relating to professional modelling, please use the contact information provided on this website.
           </p>
         </motion.div>
 
@@ -52,7 +53,7 @@ const ContactSection = () => {
               Inquiry Transmitted
             </h3>
             <p className="font-serif text-muted-foreground text-sm mb-6">
-              Thank you for contacting Stacey Soans. Your message has been received by management.
+              Thank you for contacting Stacey Soans. Your modeling inquiry has been received.
             </p>
             <button
               onClick={() => {
@@ -76,7 +77,7 @@ const ContactSection = () => {
             <input
               name="name"
               type="text"
-              placeholder="Name"
+              placeholder="Name *"
               value={formData.name}
               onChange={handleChange}
               className={inputClasses}
@@ -85,7 +86,7 @@ const ContactSection = () => {
             <input
               name="email"
               type="email"
-              placeholder="Email"
+              placeholder="Email Address *"
               value={formData.email}
               onChange={handleChange}
               className={inputClasses}
@@ -106,18 +107,18 @@ const ContactSection = () => {
               className={`${inputClasses} appearance-none cursor-pointer`}
               required
             >
-              <option value="" className="bg-[#0b0c10] text-foreground">Select Project / Engagement Category</option>
-              <option value="editorial" className="bg-[#0b0c10] text-foreground">Modelling: Editorial &amp; High Fashion</option>
-              <option value="runway" className="bg-[#0b0c10] text-foreground">Modelling: Runway &amp; Haute Couture</option>
-              <option value="commercial" className="bg-[#0b0c10] text-foreground">Modelling: Luxury Commercial Campaign</option>
-              <option value="hr" className="bg-[#0b0c10] text-foreground">Human Resources: Executive HRBP Advisory</option>
-              <option value="golf" className="bg-[#0b0c10] text-foreground">Professional Golf: Pro-Am &amp; Ambassadorship</option>
-              <option value="author" className="bg-[#0b0c10] text-foreground">Author: Keynote &amp; Fairways &amp; Femininity Review</option>
-              <option value="other" className="bg-[#0b0c10] text-foreground">Other / General Press Inquiry</option>
+              <option value="" className="bg-[#0b0c10] text-foreground">Select Modeling Category *</option>
+              <option value="fashion" className="bg-[#0b0c10] text-foreground">Fashion &amp; Lookbook Project</option>
+              <option value="beauty" className="bg-[#0b0c10] text-foreground">Beauty &amp; Cosmetic Campaign</option>
+              <option value="editorial" className="bg-[#0b0c10] text-foreground">Editorial &amp; Publication Photography</option>
+              <option value="runway" className="bg-[#0b0c10] text-foreground">Runway &amp; Fashion Event</option>
+              <option value="commercial" className="bg-[#0b0c10] text-foreground">Commercial &amp; Lifestyle Campaign</option>
+              <option value="agency" className="bg-[#0b0c10] text-foreground">Agency &amp; Representation Booking</option>
+              <option value="other" className="bg-[#0b0c10] text-foreground">Other Modeling Inquiry</option>
             </select>
             <textarea
               name="message"
-              placeholder="Message & Project Details"
+              placeholder="Project Details, Dates & Location *"
               value={formData.message}
               onChange={handleChange}
               rows={4}
@@ -128,16 +129,16 @@ const ContactSection = () => {
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <button
                 type="submit"
-                className="flex-1 border border-primary/40 py-4 text-xs tracking-[0.3em] uppercase text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-500 archive-sans font-medium"
+                className="flex-1 px-8 py-3.5 bg-gold text-black text-xs uppercase tracking-[0.25em] archive-sans font-medium hover:bg-gold-light transition-all duration-300"
               >
                 Send Inquiry
               </button>
               <a
-                href="mailto:inquiries@staceysoans.com"
-                className="flex-1 border border-gold/50 py-4 text-xs tracking-[0.3em] uppercase text-gold text-center hover:bg-gold hover:text-black transition-all duration-500 archive-sans font-medium flex items-center justify-center gap-2"
+                href={`mailto:${SITE_CONFIG.contactEmail}`}
+                className="flex-1 border border-border/80 py-3.5 text-xs tracking-[0.25em] uppercase text-foreground text-center hover:border-gold hover:text-gold transition-all duration-300 archive-sans font-medium flex items-center justify-center gap-2"
               >
                 <Mail className="w-3.5 h-3.5" />
-                <span>Email Management</span>
+                <span>Direct Email</span>
               </a>
             </div>
           </motion.form>

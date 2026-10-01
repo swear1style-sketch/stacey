@@ -1,26 +1,40 @@
 import { useState } from "react";
-import { Mail, MapPin, CheckCircle2, Send, ArrowRight, ShieldCheck, Phone, Globe } from "lucide-react";
+import { Mail, CheckCircle2, ArrowRight, Building2, MapPin } from "lucide-react";
 import SEO from "@/components/SEO";
 import Layout from "@/components/Layout";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { SITE_CONFIG, PAGES_METADATA } from "@/config/site";
 
 export const ContactPage = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    organization: "",
-    inquiryType: "modelling",
-    timeline: "",
+    phone: "",
+    projectType: "editorial",
+    dates: "",
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const meta = PAGES_METADATA.contact;
 
   const contactSchema = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
-    "name": "Contact & Professional Inquiries — Stacey Soans",
-    "description":
-      "Official contact protocol for Stacey Soans covering modelling bookings, HR executive advisory, golf appearances, and literary engagements in Toronto, Canada.",
+    "name": meta.title,
+    "description": meta.description,
+    "url": `${SITE_CONFIG.siteUrl}/contact/`,
+    "about": {
+      "@type": "Person",
+      "@id": SITE_CONFIG.personId,
+      "name": SITE_CONFIG.personName,
+      "jobTitle": "Professional Model",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": SITE_CONFIG.location.city,
+        "addressRegion": SITE_CONFIG.location.region,
+        "addressCountry": SITE_CONFIG.location.country,
+      },
+    },
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -31,19 +45,16 @@ export const ContactPage = () => {
   return (
     <Layout>
       <SEO
-        title="Contact & Professional Inquiries — Stacey Soans"
-        description="Official contact and booking protocol for Stacey Soans. Inquiries for high-fashion modelling, HR executive advisory, golf pro-ams, and author keynotes in Toronto, Canada."
-        canonical="/contact"
+        title={meta.title}
+        description={meta.description}
+        canonical={meta.canonical}
         type="website"
-        keywords={[
-          "Contact Stacey Soans",
-          "Book Stacey Soans Model",
-          "Stacey Soans HR Consulting",
-          "Stacey Soans Golf Appearance",
-          "Fairways and Femininity Book Inquiries",
-          "Stacey Soans Toronto Contact",
-        ]}
+        keywords={meta.keywords}
         schema={contactSchema}
+        breadcrumbs={[
+          { name: "Home", item: "/" },
+          { name: "Contact Stacey Soans", item: "/contact/" },
+        ]}
       />
 
       <div className="section-padding py-8 bg-[#090b0e] border-b border-border/60">
@@ -53,13 +64,13 @@ export const ContactPage = () => {
           {/* Page Header */}
           <div className="max-w-3xl mb-12">
             <span className="archive-sans text-xs uppercase tracking-[0.25em] text-gold font-medium block mb-2">
-              Official Correspondence Protocol
+              Bookings &amp; Inquiries
             </span>
             <h1 className="archive-heading text-4xl sm:text-5xl md:text-6xl font-normal text-primary mb-4">
-              Contact &amp; Professional Inquiries
+              Contact Stacey Soans
             </h1>
             <p className="font-serif text-lg md:text-xl text-muted-foreground leading-relaxed">
-              Direct communication channel for high-fashion bookings, executive Human Resources advisory, competitive golf appearances, author keynotes, and press interviews.
+              Professional bookings, casting availability, commercial campaigns, and editorial inquiries in Toronto, Canada.
             </p>
           </div>
 
@@ -67,10 +78,10 @@ export const ContactPage = () => {
             {/* Contact Form */}
             <div className="lg:col-span-7 bg-card/70 border border-border/80 p-8 md:p-10 shadow-xl">
               <h2 className="archive-heading text-2xl font-normal text-primary mb-2">
-                Submit Formal Inquiry
+                Submit Modeling Inquiry
               </h2>
               <p className="font-serif text-sm text-muted-foreground mb-8">
-                Please complete all required fields. Representatives review submissions within 24 to 48 business hours.
+                Please complete the form below. Professional inquiries are reviewed promptly.
               </p>
 
               {submitted ? (
@@ -80,7 +91,7 @@ export const ContactPage = () => {
                     Inquiry Transmitted Successfully
                   </h3>
                   <p className="font-serif text-base text-muted-foreground mb-6 max-w-md mx-auto">
-                    Thank you for reaching out to Stacey Soans. Your inquiry has been routed to the appropriate executive desk and our team will respond shortly.
+                    Thank you for reaching out to Stacey Soans. Your modeling inquiry has been received.
                   </p>
                   <button
                     onClick={() => {
@@ -88,9 +99,9 @@ export const ContactPage = () => {
                       setFormData({
                         name: "",
                         email: "",
-                        organization: "",
-                        inquiryType: "modelling",
-                        timeline: "",
+                        phone: "",
+                        projectType: "editorial",
+                        dates: "",
                         message: "",
                       });
                     }}
@@ -100,146 +111,160 @@ export const ContactPage = () => {
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-xs archive-sans uppercase tracking-widest text-muted-foreground mb-2">
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full bg-secondary/50 border border-border px-4 py-3 text-sm text-foreground font-serif focus:outline-none focus:border-gold"
-                        placeholder="e.g. Eleanor Vance"
-                      />
-                    </div>
+                <form onSubmit={handleSubmit} className="space-y-6 text-xs archive-sans">
+                  <div>
+                    <label className="block uppercase tracking-wider text-muted-foreground mb-2">
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      placeholder="Your Name"
+                      className="w-full bg-secondary/50 border border-border/80 px-4 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-gold transition-colors font-serif text-sm"
+                    />
+                  </div>
 
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs archive-sans uppercase tracking-widest text-muted-foreground mb-2">
-                        Official Email *
+                      <label className="block uppercase tracking-wider text-muted-foreground mb-2">
+                        Email Address *
                       </label>
                       <input
                         type="email"
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full bg-secondary/50 border border-border px-4 py-3 text-sm text-foreground font-serif focus:outline-none focus:border-gold"
-                        placeholder="e.g. evance@organization.com"
+                        placeholder="your.email@domain.com"
+                        className="w-full bg-secondary/50 border border-border/80 px-4 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-gold transition-colors font-serif text-sm"
+                      />
+                    </div>
+                    <div>
+                      <label className="block uppercase tracking-wider text-muted-foreground mb-2">
+                        Phone Number (Optional)
+                      </label>
+                      <input
+                        type="tel"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        placeholder="Direct Phone"
+                        className="w-full bg-secondary/50 border border-border/80 px-4 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-gold transition-colors font-serif text-sm"
                       />
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs archive-sans uppercase tracking-widest text-muted-foreground mb-2">
-                        Organization / Agency / Publication
-                      </label>
-                      <input
-                        type="text"
-                        value={formData.organization}
-                        onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
-                        className="w-full bg-secondary/50 border border-border px-4 py-3 text-sm text-foreground font-serif focus:outline-none focus:border-gold"
-                        placeholder="e.g. Luxury Media House / Tech Enterprise"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-xs archive-sans uppercase tracking-widest text-muted-foreground mb-2">
+                      <label className="block uppercase tracking-wider text-muted-foreground mb-2">
                         Inquiry Category *
                       </label>
                       <select
-                        value={formData.inquiryType}
-                        onChange={(e) => setFormData({ ...formData, inquiryType: e.target.value })}
-                        className="w-full bg-secondary/50 border border-border px-4 py-3 text-sm text-foreground font-serif focus:outline-none focus:border-gold"
+                        value={formData.projectType}
+                        onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
+                        className="w-full bg-secondary/50 border border-border/80 px-4 py-3 text-foreground focus:outline-none focus:border-gold transition-colors font-serif text-sm cursor-pointer"
                       >
-                        <option value="modelling" className="bg-[#0b0c10]">Professional Modelling / Campaign Booking</option>
-                        <option value="hr" className="bg-[#0b0c10]">Human Resources Advisory / HRBP Consultation</option>
-                        <option value="golf" className="bg-[#0b0c10]">Professional Golf Pro-Am / Course Writing</option>
-                        <option value="author" className="bg-[#0b0c10]">Author Keynote / Fairways &amp; Femininity Review</option>
-                        <option value="press" className="bg-[#0b0c10]">Press Interview / Media Appearance</option>
-                        <option value="other" className="bg-[#0b0c10]">General Archival Inquiry</option>
+                        <option value="fashion">Fashion &amp; Lookbook Project</option>
+                        <option value="beauty">Beauty &amp; Cosmetic Campaign</option>
+                        <option value="editorial">Editorial &amp; Publication Photography</option>
+                        <option value="runway">Runway &amp; Live Fashion Event</option>
+                        <option value="commercial">Commercial Advertising &amp; Lifestyle</option>
+                        <option value="agency">Agency / Casting Representation</option>
+                        <option value="press">Media &amp; Press Feature</option>
                       </select>
+                    </div>
+                    <div>
+                      <label className="block uppercase tracking-wider text-muted-foreground mb-2">
+                        Proposed Project Dates
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.dates}
+                        onChange={(e) => setFormData({ ...formData, dates: e.target.value })}
+                        placeholder="e.g. November 2026 / TBD"
+                        className="w-full bg-secondary/50 border border-border/80 px-4 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-gold transition-colors font-serif text-sm"
+                      />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs archive-sans uppercase tracking-widest text-muted-foreground mb-2">
-                      Proposed Project Scope &amp; Details *
+                    <label className="block uppercase tracking-wider text-muted-foreground mb-2">
+                      Project Details &amp; Location *
                     </label>
                     <textarea
-                      rows={5}
                       required
+                      rows={5}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full bg-secondary/50 border border-border px-4 py-3 text-sm text-foreground font-serif focus:outline-none focus:border-gold resize-none"
-                      placeholder="Please outline the deliverables, desired dates, shooting locations, or advisory engagement parameters..."
+                      placeholder="Please provide styling scope, usage rights, creative direction, and shoot location..."
+                      className="w-full bg-secondary/50 border border-border/80 px-4 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-gold transition-colors font-serif text-sm resize-none"
                     />
                   </div>
 
-                  <button
-                    type="submit"
-                    className="w-full py-4 bg-gold text-black hover:bg-gold-light transition-colors text-xs uppercase tracking-[0.25em] archive-sans font-medium flex items-center justify-center gap-2"
-                  >
-                    <span>Transmit Professional Inquiry</span>
-                    <Send className="w-3.5 h-3.5" />
-                  </button>
+                  <div className="flex flex-col sm:flex-row gap-4 pt-2">
+                    <button
+                      type="submit"
+                      className="flex-1 px-8 py-3.5 bg-gold text-black text-xs uppercase tracking-[0.25em] archive-sans font-medium hover:bg-gold-light transition-all duration-300"
+                    >
+                      Book Stacey
+                    </button>
+                    <a
+                      href={`mailto:${SITE_CONFIG.contactEmail}`}
+                      className="flex-1 border border-border px-8 py-3.5 text-xs uppercase tracking-[0.2em] archive-sans text-center text-foreground hover:border-gold hover:text-gold transition-colors flex items-center justify-center gap-2"
+                    >
+                      <Mail className="w-3.5 h-3.5" />
+                      <span>Professional Inquiry</span>
+                    </a>
+                  </div>
                 </form>
               )}
             </div>
 
-            {/* Sidebar Representation & Headquarters */}
+            {/* Factual Protocol Card */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="p-6 bg-card/80 border border-border/80">
-                <div className="flex items-center gap-2 text-gold text-xs archive-sans uppercase tracking-widest mb-4 pb-2 border-b border-border/60">
-                  <MapPin className="w-4 h-4" />
-                  <span>Primary Regional Base</span>
-                </div>
-                <div className="font-serif space-y-2 text-sm text-foreground/90">
-                  <p className="font-medium text-primary text-base">Stacey Soans Executive Office</p>
-                  <p className="text-muted-foreground">Toronto, Ontario, Canada</p>
-                  <p className="text-muted-foreground text-xs archive-sans mt-3">
-                    Available for domestic Canadian and international travel for runway, campaigns, and corporate advisory.
-                  </p>
-                </div>
-              </div>
-
-              <div className="p-6 bg-card/80 border border-border/80">
-                <div className="flex items-center gap-2 text-gold text-xs archive-sans uppercase tracking-widest mb-4 pb-2 border-b border-border/60">
-                  <Mail className="w-4 h-4" />
-                  <span>Direct Electronic Correspondence</span>
-                </div>
-                <div className="space-y-3 text-xs archive-sans">
-                  <div>
-                    <span className="text-muted-foreground block text-[11px]">Primary Inquiries:</span>
-                    <a
-                      href="mailto:inquiries@staceysoans.com"
-                      className="text-foreground hover:text-gold transition-colors font-medium text-sm font-serif"
-                    >
-                      inquiries@staceysoans.com
-                    </a>
-                  </div>
-                  <div>
-                    <span className="text-muted-foreground block text-[11px]">Literary &amp; Book Media:</span>
-                    <a
-                      href="mailto:inquiries@staceysoans.com"
-                      className="text-foreground hover:text-gold transition-colors font-medium text-sm font-serif"
-                    >
-                      publishing@staceysoans.com
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-6 bg-secondary/30 border border-border/80">
-                <div className="flex items-center gap-2 text-gold text-xs archive-sans uppercase tracking-widest mb-3">
-                  <ShieldCheck className="w-4 h-4" />
-                  <span>Official Verification Note</span>
-                </div>
-                <p className="text-xs font-serif text-muted-foreground leading-relaxed">
-                  All contracts, agreements, and official appearances must be validated through authorized written confirmation from Stacey Soans or designated legal counsel.
+              <div className="p-8 bg-secondary/30 border border-border/80 space-y-5">
+                <span className="text-xs archive-sans uppercase tracking-widest text-gold font-medium block">
+                  Official Inquiries
+                </span>
+                <p className="font-serif text-base text-foreground leading-relaxed">
+                  For professional inquiries relating to professional modelling, please use the contact information provided on this website.
                 </p>
+                <p className="font-serif text-sm text-muted-foreground leading-relaxed">
+                  Media, publishing, professional collaboration and business inquiries can be directed through the appropriate contact information provided on this website.
+                </p>
+              </div>
+
+              <div className="p-6 bg-card/60 border border-border/80 space-y-4 text-xs archive-sans">
+                <div className="flex items-start gap-3">
+                  <MapPin className="w-4 h-4 text-gold flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span className="text-muted-foreground block text-[10px] uppercase">Primary Base</span>
+                    <span className="font-serif text-sm text-foreground">Toronto, Ontario, Canada</span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 pt-3 border-t border-border/40">
+                  <Building2 className="w-4 h-4 text-gold flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span className="text-muted-foreground block text-[10px] uppercase">Representation History</span>
+                    <span className="font-serif text-sm text-foreground">
+                      Icon Model Management (Toronto)
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 pt-3 border-t border-border/40">
+                  <Mail className="w-4 h-4 text-gold flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span className="text-muted-foreground block text-[10px] uppercase">Direct Email</span>
+                    <a
+                      href={`mailto:${SITE_CONFIG.contactEmail}`}
+                      className="font-serif text-sm text-gold hover:underline"
+                    >
+                      {SITE_CONFIG.contactEmail}
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -17,7 +17,7 @@ export const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
         <li className="flex items-center gap-1.5">
           <Link to="/" className="hover:text-gold flex items-center gap-1 transition-colors">
             <Home className="w-3.5 h-3.5" />
-            <span>Encyclopedia Home</span>
+            <span>Home</span>
           </Link>
         </li>
         {items.map((item, index) => {

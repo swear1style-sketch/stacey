@@ -1,95 +1,69 @@
 import { Link } from "react-router-dom";
-import { GraduationCap, Award, MapPin, CheckCircle2, ArrowRight, BookOpen, Briefcase, Trophy, Sparkles } from "lucide-react";
+import { ArrowRight, ShieldCheck, Sparkles, Building2, MapPin } from "lucide-react";
 import SEO from "@/components/SEO";
 import Layout, { useLightbox } from "@/components/Layout";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import UncroppedPhoto from "@/components/UncroppedPhoto";
-import PillarsGrid from "@/components/PillarsGrid";
+import { SITE_CONFIG, PAGES_METADATA } from "@/config/site";
 
-import aboutPortrait from "@/assets/stacey/about-stacey.jpg";
-import heroModel from "@/assets/stacey/stacey-digitals.jpg";
+import aboutPortrait from "@/assets/stacey/pub-outdoor.jpg";
+import digitalsPortrait from "@/assets/stacey/pub-digitals-full.jpg";
 
 export const AboutPage = () => {
   const { openLightbox } = useLightbox();
+  const meta = PAGES_METADATA.about;
 
   const aboutSchema = {
     "@context": "https://schema.org",
     "@type": "ProfilePage",
     "mainEntity": {
       "@type": "Person",
-      "name": "Stacey Soans",
-      "jobTitle": [
-        "Human Resources Business Partner Leader",
-        "Professional Golfer & Golf Writer",
-        "Author of Fairways & Femininity",
-        "Professional Fashion Model (Icon Model Management)",
-      ],
+      "@id": SITE_CONFIG.personId,
+      "name": SITE_CONFIG.personName,
+      "jobTitle": "Professional Model",
+      "description": meta.description,
+      "url": `${SITE_CONFIG.siteUrl}/about-stacey-soans/`,
+      "image": `${SITE_CONFIG.siteUrl}/og-image.jpg`,
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "Toronto",
-        "addressRegion": "Ontario",
-        "addressCountry": "Canada",
+        "addressLocality": SITE_CONFIG.location.city,
+        "addressRegion": SITE_CONFIG.location.region,
+        "addressCountry": SITE_CONFIG.location.country,
       },
-      "alumniOf": {
-        "@type": "EducationalOrganization",
-        "name": "University of Toronto",
-        "award": "Bachelor of Arts (Honours) in Political Science",
-      },
-      "description":
-        "Comprehensive biographical record and verified educational background of Stacey Soans, an executive HR leader (Private Equity, Mining, REITs), competitive golfer, published author, and model with Icon Model Management in Toronto, Canada.",
+      "knowsAbout": [
+        "Fashion Modeling",
+        "Beauty Campaigns",
+        "Editorial Photography",
+        "Runway Modeling",
+        "Commercial Photography",
+      ],
     },
   };
 
-  const milestones = [
-    {
-      year: "2025–2026",
-      title: "Fairways & Femininity: The Modern Woman's Guide to Golf",
-      desc: "Published debut literary project connecting athletic mastery with executive growth. International expansion and keynote speaking on women in sports and business.",
-    },
-    {
-      year: "2021–Present",
-      title: "Senior HR Business Partner & Private Equity Advisory",
-      desc: "Architected executive talent succession and people strategy across private equity (Accilent Capital), mining, engineering, and REITs—elevating leadership readiness by 40%.",
-    },
-    {
-      year: "2019–Present",
-      title: "Icon Model Management Signing & Shoppers Beauty",
-      desc: "Signed with Icon Model Management in Toronto; featured in major national commercial campaigns including Shoppers Beauty (celebrating diverse skin tones) and luxury editorials.",
-    },
-    {
-      year: "2015–2019",
-      title: "International Competitive Golf & Journalism",
-      desc: "Competed internationally, launched women's golf initiatives across Ontario, and authored course analyses and thought leadership essays.",
-    },
-    {
-      year: "Foundations",
-      title: "University of Toronto — B.A. (Honours) Political Science",
-      desc: "Earned Honours Bachelor's Degree in Political Science from the University of Toronto, developing the strategic governance and systems frameworks underpinning her corporate practice.",
-    },
-    {
-      year: "Early Career",
-      title: "Discovered at Age 12 & Sutherland Models",
-      desc: "Scouted in a Toronto mall at age 12; spent over a decade working across runway, editorial spreads, and music video productions, instilling lifelong discipline and brand composure.",
-    },
+  const modelStats = [
+    { label: "Base", value: "Toronto, Ontario, Canada" },
+    { label: "Height", value: SITE_CONFIG.modelStats.height },
+    { label: "Eyes", value: SITE_CONFIG.modelStats.eyes },
+    { label: "Hair", value: SITE_CONFIG.modelStats.hair },
+    { label: "Specialty", value: "Fashion, Beauty, Editorial, Runway, Commercial" },
+    { label: "Experience", value: "Over 10 Years Professional Modeling" },
+    { label: "Start", value: "Began Modelling at Age 12" },
+    { label: "Representation", value: "Icon Model Management (Toronto)" },
   ];
 
   return (
     <Layout>
       <SEO
-        title="About Stacey Soans — Biography, Education & Professional Background"
-        description="Comprehensive biography, academic education, and multifaceted professional background of Stacey Soans, spanning Human Resources, golf, authorship, and modelling in Toronto, Canada."
-        canonical="/about"
+        title={meta.title}
+        description={meta.description}
+        canonical={meta.canonical}
         type="profile"
-        keywords={[
-          "About Stacey Soans",
-          "Stacey Soans Biography",
-          "Stacey Soans Education",
-          "Stacey Soans Toronto",
-          "Stacey Soans Career",
-          "Human Resources Leader Stacey Soans",
-          "Stacey Soans Model Profile",
-        ]}
+        keywords={meta.keywords}
         schema={aboutSchema}
+        breadcrumbs={[
+          { name: "Home", item: "/" },
+          { name: "About Stacey Soans", item: "/about-stacey-soans/" },
+        ]}
       />
 
       <div className="section-padding py-8 bg-[#090b0e] border-b border-border/60">
@@ -99,143 +73,128 @@ export const AboutPage = () => {
           {/* Page Header */}
           <div className="max-w-3xl mb-12">
             <span className="archive-sans text-xs uppercase tracking-[0.25em] text-gold font-medium block mb-2">
-              Official Biographical Record
+              Model Biography &amp; Profile
             </span>
             <h1 className="archive-heading text-4xl sm:text-5xl md:text-6xl font-normal text-primary mb-4">
               About Stacey Soans
             </h1>
             <p className="font-serif text-lg md:text-xl text-muted-foreground leading-relaxed">
-              Biography, academic education, and professional journey across executive Human Resources, professional golf, authorship, and high-fashion modelling in Toronto, Canada.
+              Professional model based in Toronto, Canada with more than a decade of experience across high-fashion editorials, beauty campaigns, runway appearances, and commercial projects.
             </p>
           </div>
 
-          {/* Main Bio Grid with 100% Uncropped Image */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-20">
-            {/* Left Column: Full Uncropped Portrait */}
-            <div className="lg:col-span-5">
-              <div className="sticky top-28">
-                <UncroppedPhoto
-                  src={aboutPortrait}
-                  alt="Stacey Soans - Archival Biography Portrait"
-                  caption="Stacey Soans — Toronto, Ontario, Canada"
-                  catalogId="BIO-PORTRAIT-01"
-                  year="2026"
-                  category="Official Bio Portrait"
-                  maxHeightClass="max-h-[580px]"
-                  onOpenLightbox={openLightbox}
-                />
-                
-                {/* Fast Facts Card */}
-                <div className="mt-6 p-5 bg-card/70 border border-border/80">
-                  <h3 className="archive-sans text-xs uppercase tracking-widest text-gold mb-3 pb-2 border-b border-border/60">
-                    Biographical Data
-                  </h3>
-                  <div className="space-y-2.5 text-xs archive-sans">
-                    <div className="flex justify-between py-1 border-b border-border/40">
-                      <span className="text-muted-foreground">Primary Residence:</span>
-                      <span className="text-foreground font-medium">Toronto, Ontario, Canada</span>
-                    </div>
-                    <div className="flex justify-between py-1 border-b border-border/40">
-                      <span className="text-muted-foreground">Professional Scope:</span>
-                      <span className="text-foreground font-medium">HR, Athletics, Literature, Fashion</span>
-                    </div>
-                    <div className="flex justify-between py-1 border-b border-border/40">
-                      <span className="text-muted-foreground">Published Works:</span>
-                      <span className="text-foreground font-medium">Fairways &amp; Femininity (2025)</span>
-                    </div>
-                    <div className="flex justify-between py-1">
-                      <span className="text-muted-foreground">Representation:</span>
-                      <span className="text-foreground font-medium">Toronto / International Editorial</span>
-                    </div>
-                  </div>
+          {/* Main Biography Section */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start mb-20">
+            {/* Left: Biography Text */}
+            <div className="lg:col-span-7 space-y-6 font-serif text-base sm:text-lg leading-[1.85] text-muted-foreground">
+              <div className="p-6 bg-card/60 border border-border/80 text-foreground/95">
+                <p className="font-medium text-lg leading-relaxed">
+                  Stacey Soans of Toronto, Canada is a professional model with more than a decade of experience spanning fashion, beauty, editorial, runway and commercial modelling.
+                </p>
+              </div>
+
+              <p>
+                Stacey Soans began modelling at age 12 and has developed a professional portfolio across Toronto fashion, beauty campaigns, editorial publications, runway events and commercial projects.
+              </p>
+
+              <p>
+                Her professional modelling work includes fashion editorials, beauty campaigns, commercial photography, runway appearances and lifestyle projects. Throughout her career, she has cultivated an adaptable editorial range, recognized for architectural posture, clean silhouette lines, and authentic poise.
+              </p>
+
+              <div className="p-6 bg-secondary/30 border border-border/80 rounded-sm my-6">
+                <div className="flex items-center gap-2 text-xs archive-sans uppercase tracking-widest text-gold mb-2">
+                  <Building2 className="w-4 h-4" />
+                  <span>Agency Representation</span>
                 </div>
+                <p className="font-serif text-sm text-foreground/90 leading-relaxed">
+                  Stacey Soans has been represented by professional modelling agencies in Toronto, including Icon Model Management.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-4 pt-4">
+                <Link
+                  to="/modeling-career/"
+                  className="inline-flex items-center gap-2 px-8 py-3.5 bg-gold text-black text-xs uppercase tracking-[0.25em] archive-sans font-medium hover:bg-gold-light transition-all duration-300"
+                >
+                  <span>Explore Modeling Career</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+                <Link
+                  to="/contact/"
+                  className="inline-flex items-center gap-2 border border-border px-6 py-3.5 text-xs uppercase tracking-[0.2em] archive-sans text-muted-foreground hover:text-foreground hover:border-gold transition-colors"
+                >
+                  <span>Inquire for Booking</span>
+                </Link>
               </div>
             </div>
 
-            {/* Right Column: In-depth Biography Content */}
-            <div className="lg:col-span-7 font-serif text-base md:text-lg text-foreground/85 leading-relaxed space-y-6">
-              <h2 className="archive-heading text-2xl md:text-3xl font-normal text-primary border-b border-border/60 pb-3">
-                Biographical Narrative
-              </h2>
+            {/* Right: Full Uncropped Portrait & Verified Stats */}
+            <div className="lg:col-span-5 space-y-8">
+              <UncroppedPhoto
+                src={aboutPortrait}
+                alt="Stacey Soans — Professional Model Biography Portrait in Toronto"
+                caption="Official Model Biography Portrait"
+                catalogId="BIO-TOR-01"
+                year="2026"
+                category="Biography"
+                onOpenLightbox={openLightbox}
+              />
 
-              <p>
-                <strong className="text-primary font-normal">Stacey Soans</strong> is a Toronto-based Human Resources Business Partner leader, competitive golfer, published author, and professional model whose career exemplifies the synthesis of intellectual rigor, corporate strategy, athletic discipline, and creative presence.
-              </p>
-
-              <p>
-                Scouted for modelling at age 12 in a Toronto mall, Stacey spent over a decade developing an acute understanding of personal branding, poise, and public communication across runway shows, commercial campaigns, and music video appearances. Earlier in her career, she was represented by Sutherland Models, and since 2019 has been signed with Toronto&apos;s prestigious <strong className="text-primary font-normal">Icon Model Management</strong>. She has starred in prominent national campaigns including <strong className="text-primary font-normal">Shoppers Beauty</strong> (celebrating diverse skin tones and complexion products) and editorial spreads.
-              </p>
-
-              <p>
-                As a senior <strong className="text-primary font-normal">Human Resources Business Partner (HRBP)</strong>, Stacey brings human-centered leadership to high-impact industries including <strong className="text-primary font-normal">private equity, mining, engineering, and real estate investment trusts (REITs)</strong>. Notably at private equity firm <strong className="text-primary font-normal">Accilent Capital</strong>, she redesigned performance and development architectures that increased leadership pipeline readiness by 40% in under two years. Her core operating philosophy is unequivocal: <em>&ldquo;When you invest in people, performance follows.&rdquo;</em>
-              </p>
-
-              <p>
-                An avid international golfer, Stacey channels the strategic composure of the links into her corporate advisory and literary writing. In 2025, she published her debut book, <strong className="text-primary font-normal">Fairways and Femininity: The Modern Woman&apos;s Guide to Golf</strong>, championing female empowerment, wellness, mental resilience, and networking on the world&apos;s premier fairways.
-              </p>
-
-              <h2 className="archive-heading text-2xl md:text-3xl font-normal text-primary border-b border-border/60 pb-3 pt-6">
-                Education &amp; Academic Background
-              </h2>
-
-              <div className="space-y-4">
-                <div className="p-5 bg-secondary/30 border border-border/80">
-                  <div className="flex items-center gap-2 text-gold text-xs archive-sans uppercase tracking-wider mb-1">
-                    <GraduationCap className="w-4 h-4" />
-                    <span>University Higher Education</span>
-                  </div>
-                  <h3 className="font-serif text-lg text-primary font-normal">
-                    University of Toronto — Bachelor of Arts (Honours) in Political Science
-                  </h3>
-                  <p className="text-sm font-serif text-muted-foreground mt-1">
-                    Graduated with honours from one of Canada&apos;s foremost academic institutions. Coursework and research concentrated on leadership frameworks, institutional governance, systemic policy analysis, and organizational dynamics—sharpening the analytical precision and critical thinking she brings to executive HR strategy.
-                  </p>
+              {/* Verified Model Stats Card */}
+              <div className="p-6 bg-card/80 border border-border/80">
+                <div className="flex items-center justify-between border-b border-border/60 pb-3 mb-4">
+                  <span className="archive-sans text-xs uppercase tracking-widest text-gold font-medium">
+                    Verified Model Statistics
+                  </span>
+                  <span className="text-[10px] archive-sans px-2 py-0.5 bg-secondary text-muted-foreground border border-border/60">
+                    Toronto, Canada
+                  </span>
                 </div>
 
-                <div className="p-5 bg-secondary/30 border border-border/80">
-                  <div className="flex items-center gap-2 text-gold text-xs archive-sans uppercase tracking-wider mb-1">
-                    <Award className="w-4 h-4" />
-                    <span>Executive Certifications &amp; Coaching</span>
-                  </div>
-                  <h3 className="font-serif text-lg text-primary font-normal">
-                    Certified Leadership Coaching &amp; Executive Development
-                  </h3>
-                  <p className="text-sm font-serif text-muted-foreground mt-1">
-                    Certified in leadership coaching, executive presence development, succession planning modeling, 360° feedback architecture, and organizational change management frameworks tailored for rapid corporate expansion.
-                  </p>
+                <div className="grid grid-cols-2 gap-3 text-xs archive-sans">
+                  {modelStats.map((st) => (
+                    <div key={st.label} className="p-2.5 bg-secondary/30 border border-border/50">
+                      <span className="text-muted-foreground block text-[10px] uppercase tracking-wider mb-0.5">
+                        {st.label}
+                      </span>
+                      <span className="text-foreground font-serif text-xs font-medium">
+                        {st.value}
+                      </span>
+                    </div>
+                  ))}
                 </div>
               </div>
+            </div>
+          </div>
 
-              <h2 className="archive-heading text-2xl md:text-3xl font-normal text-primary border-b border-border/60 pb-3 pt-6">
-                Career Milestones &amp; Archival Timeline
+          {/* Secondary Visual Showcase */}
+          <div className="border-t border-border/60 pt-16 mb-16">
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <span className="archive-sans text-xs uppercase tracking-[0.25em] text-gold font-medium block mb-2">
+                Agency Digitals
+              </span>
+              <h2 className="font-serif text-2xl sm:text-4xl text-primary font-normal">
+                Natural Form &amp; Composure
               </h2>
+              <p className="font-serif text-sm text-muted-foreground mt-2">
+                Natural daylight casting portraits highlighting classic proportions and authentic facial symmetry.
+              </p>
+            </div>
 
-              <div className="border-l-2 border-gold/40 pl-6 space-y-8 my-6">
-                {milestones.map((item, idx) => (
-                  <div key={idx} className="relative">
-                    <div className="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-gold border-2 border-background" />
-                    <span className="text-xs archive-sans font-medium uppercase tracking-widest text-gold block mb-1">
-                      {item.year}
-                    </span>
-                    <h3 className="archive-heading text-xl font-normal text-primary mb-1">
-                      {item.title}
-                    </h3>
-                    <p className="font-serif text-sm text-muted-foreground leading-relaxed">
-                      {item.desc}
-                    </p>
-                  </div>
-                ))}
-              </div>
+            <div className="max-w-md mx-auto">
+              <UncroppedPhoto
+                src={digitalsPortrait}
+                alt="Stacey Soans official model casting digitals portrait"
+                caption="Official Model Digitals — Icon Model Management"
+                catalogId="DIG-MOD-01"
+                year="2026"
+                category="Editorial"
+                onOpenLightbox={openLightbox}
+              />
             </div>
           </div>
         </div>
       </div>
-
-      {/* Cross-linking to Pillars */}
-      <PillarsGrid
-        title="Explore Stacey's Professional Pillars"
-        subtitle="Detailed documentation on each of the four areas defining Stacey Soans's professional practice."
-      />
     </Layout>
   );
 };
